@@ -113,7 +113,7 @@ void PIDcalculatev(){
     Serial.print(median_speedv); 
     Serial.println(", ");
 
-    if(right() || left()){
+    if(right() || left()) {
       actual_RPM = target_RPM;
     }
   }

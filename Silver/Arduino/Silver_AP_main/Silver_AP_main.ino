@@ -136,7 +136,7 @@ void loop() {
     Serial.print(" Derivative:");
     Serial.println(kd * derivative);
 
-      traverse();
+    traverse();
   }
   else if (cmd == 'u'){
     PIDcalculatev();
