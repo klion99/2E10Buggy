@@ -63,7 +63,7 @@ void setup() {
   cp5.addSlider("Speed")
      .setPosition(350, 400)
      .setSize(250, 30)
-     .setRange(0, 135)
+     .setRange(0, 46)
      .setValue(100)
      .setLabel("Speed");
 
@@ -178,6 +178,8 @@ void Speed(int value) {
   char[] buffer = new char[5]; // 5 characters: 'V', 3 digits, and a null terminator
 
   // Use String.format to format the value with leading zeros
+  int velocity = value;
+  value = round(value*60/(6.5*3.1415));
   String formattedValue = String.format("V%03d", value); // %03d ensures 3 digits with leading zeros
 
   // Convert the formatted string to a char array
@@ -203,6 +205,6 @@ void Speed(int value) {
   myClient.clear();
 
   // Log the sent message
-  logTextarea.append("Sent: " + new String(buffer) + "\n");
+  logTextarea.append("Sent: " + String.format("%02d", velocity) + " cm/s" + "\n");
   
 }
