@@ -6,7 +6,7 @@
 
 //PID variables 
 
-double target_distance = 10; 
+double target_distance = 15; 
 double actual_distance; 
 
 
@@ -49,8 +49,8 @@ void SetSpeedPIDD(float Speed) {
   if (median_speed < 0) {
     median_speed = 0;
   } 
-  else if (median_speed > 190) {
-    median_speed = 190;
+  else if (median_speed > 120) {
+    median_speed = 120;
   }
 }
 
@@ -113,6 +113,9 @@ void PIDcalculateD(){
     delay(100);
   }
   else {
-    stopMotors();
+    while(distance > 70){
+      stopMotors();
+      checkdistance();
+    }
   }
 }

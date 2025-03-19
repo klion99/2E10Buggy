@@ -10,7 +10,7 @@ int actual_RPM;
 int actual_rpm_R;
 int actual_rpm_L; 
 
-long long errorv =0;
+long long errorv = 0;
 long long last_errorv = 0;
 
 long long proportionalv = 0;
