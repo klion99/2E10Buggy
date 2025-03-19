@@ -279,6 +279,9 @@ void traverse(){
       displayDistance(); //display measured distance on Arduino LED panel
       checkdistance(); //update distance again.
     }
+    if(distance > 70){
+      median_speed = 110;
+    }
     //if the bools left and right detected are off i.e IR sensors do not detect white lines, the motorforward command runs, motors turn at the same speed
     if (forward()) {
       //uses median_speed, updated via PID

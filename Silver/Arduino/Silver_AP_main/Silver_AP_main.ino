@@ -137,11 +137,12 @@ void loop() {
     Serial.println(kd * derivative);
 
     traverse();
+
   }
   else if (cmd == 'u'){
     PIDcalculatev();
     client.flush();
-    client.print("Current RPM" + String((actual_RPM/60)*6.5*3.1415) + " Target RPM: " + String((target_RPM/60)*6.5*3.1415));
+    client.print("Current RPM" + String((actual_RPM)*6.5*3.1415/60) + " Target RPM: " + String((target_RPM)*6.5*3.1415/60));
     traverse_v();
   }
 }

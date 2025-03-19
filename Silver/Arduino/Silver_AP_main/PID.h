@@ -49,8 +49,8 @@ void SetSpeedPIDD(float Speed) {
   if (median_speed < 0) {
     median_speed = 0;
   } 
-  else if (median_speed > 130) {
-    median_speed = 130;
+  else if (median_speed > 110) {
+    median_speed = 110;
   }
 }
 
@@ -109,13 +109,6 @@ void PIDcalculateD(){
     velocity_PWM = kp * proportional + ki * integral + kd * derivative;
 
     SetSpeedPIDD(velocity_PWM);
-
-    delay(100);
-  }
-  else {
-    while(distance > 70){
-      stopMotors();
-      checkdistance();
+    
     }
   }
-}

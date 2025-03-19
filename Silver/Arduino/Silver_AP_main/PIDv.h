@@ -28,8 +28,8 @@ double kiv;
 double kdv;
 
 double max_derivativev = 1000; 
-int time_for_rpm_calc = 200; 
-int update = 200;
+int time_for_rpm_calc = 100; 
+int update = 100;
 
 void SetConstantsv(double KP = 1,double KI = 1,double KD = 1){
   kpv = KP;
@@ -52,7 +52,7 @@ void SetSpeedPIDv(float Speed) {
 
 
 void PIDsetupv(){
-  SetConstantsv(0.0059,0.000002,0.12); //P is tracking, I is long term error, d is reactivity.
+  SetConstantsv(0.0050,0.000002,0.12); //P is tracking, I is long term error, d is reactivity.
 }
 
 void PIDcalculatev(){
