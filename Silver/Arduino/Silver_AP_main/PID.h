@@ -20,6 +20,10 @@ long long last_error = 0;
 long long  last_time = 0;
 long long  current_time;
 
+int actual_RPMd; 
+int actual_rpm_Rd;
+int actual_rpm_Ld; 
+
 
 
 float velocity_PWM = 0;
@@ -76,6 +80,12 @@ void PIDcalculateD(){
     double time_diff = current_time - last_time;
     
     if (time_diff > 0) { // Prevent division by zero
+      actual_rpm_Ld = ((pulseCountL / 8.0) / time_diff) * 60.0;
+      actual_rpm_Rd = ((pulseCountR / 8.0) / time_diff) * 60.0;
+      //resetting pulsecounters for each encoder
+      pulseCountL = 0;
+      pulseCountR = 0;
+      actual_RPMd = (actual_rpm_Ld + actual_rpm_Rd)/2;
         derivative = (error - last_error) / time_diff;
         // Limit derivative to prevent overflow
       if (derivative > max_derivative) {

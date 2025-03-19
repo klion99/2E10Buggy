@@ -122,7 +122,7 @@ void loop() {
     PIDcalculateD();
 
     client.flush();
-    client.print("distance: " + String(distance) + " median_speed: " + String(median_speed));
+    client.print("distance cm: " + String(distance) + "  Current Speed cm/s: " + String((actual_RPMd)*6.5*3.1415/60));
     //delay(100);
 
     Serial.print("distance:");
@@ -142,7 +142,7 @@ void loop() {
   else if (cmd == 'u'){
     PIDcalculatev();
     client.flush();
-    client.print("Current RPM" + String((actual_RPM)*6.5*3.1415/60) + " Target RPM: " + String((target_RPM)*6.5*3.1415/60));
+    client.print("Current Speed cm/s:" + String((actual_RPM)*6.5*3.1415/60) + " Target Speed cm/s:" + String((target_RPM)*6.5*3.1415/60));
     traverse_v();
   }
 }
