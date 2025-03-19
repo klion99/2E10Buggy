@@ -49,8 +49,8 @@ void SetSpeedPIDD(float Speed) {
   if (median_speed < 0) {
     median_speed = 0;
   } 
-  else if (median_speed > 120) {
-    median_speed = 120;
+  else if (median_speed > 130) {
+    median_speed = 130;
   }
 }
 
