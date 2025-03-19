@@ -63,7 +63,7 @@ void setup() {
   cp5.addSlider("Speed")
      .setPosition(350, 400)
      .setSize(250, 30)
-     .setRange(0, 46)
+     .setRange(0, 25)
      .setValue(100)
      .setLabel("Speed");
 
