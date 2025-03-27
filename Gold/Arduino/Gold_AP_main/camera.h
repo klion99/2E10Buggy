@@ -10,9 +10,16 @@ HUSKYLENS huskylens;
   }
 } */
 
+int ID;
+int current_time_c = 500;
+int update_c = 500;
+
+int getID(){
+  return ID;
+}
 
 // I2C communication setup
-void setup() {
+void camerasetup() {
     Serial.begin(115200);
     Wire.begin();
     
@@ -27,22 +34,25 @@ void setup() {
 
 String Temp = " ";
 
-void loop() {
+void cameraloop() {
+  if(millis() > current_time_c){
     if (huskylens.request()) {
         if (huskylens.count()) {
-            Serial.println("Object detected!");
+            //Serial.println("Object detected!");
             for (int i = 0; i < huskylens.count(); i++) {
                 HUSKYLENSResult result = huskylens.get(i);
-                Serial.print("Object ID: "); Serial.println(result.ID);
+/*              Serial.print("Object ID: "); Serial.println(result.ID);
                 Serial.print("X: "); Serial.print(result.xCenter);
                 Serial.print(", Y: "); Serial.print(result.yCenter);
                 Serial.print(", Width: "); Serial.print(result.width);
-                Serial.print(", Height: "); Serial.println(result.height);
+                Serial.print(", Height: "); Serial.println(result.height); */
+              ID = result.ID;
             }
         } else{
-            
-            Serial.println("NoObject");
+            //Serial.println("NoObject");
+            ID = 0;
         }
     }
-    delay(500);
+    current_time_c = current_time_c + update_c;
+  }
 }

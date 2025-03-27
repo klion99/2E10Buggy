@@ -2,12 +2,14 @@
 #include "wifiAP.h"
 #include "PID.h"
 #include "PIDv.h"
-
+#include "camera.h"
 
 //message string for sending mean distance to client 
 String MD = "";
 int timer;
 char cmd; 
+int current_ID;
+int previous_ID;
 
 
 void setup() {
@@ -21,6 +23,9 @@ void setup() {
 
   //setting up arduino as server via access point
   Wifisetup(); 
+
+  //huskeylens code
+  camerasetup();
 
 
   //encoder pins setup
@@ -42,11 +47,8 @@ void loop() {
 
 
   //determines command sent from processing
-  cmd = getcommand(); 
-  
- 
-
-
+  //cmd = getcommand(); 
+  cmd = 'c'; 
 
   printcmd(cmd); //printing command to console, debugging 
 
@@ -143,6 +145,15 @@ void loop() {
     client.flush();
     client.print("Current RPM" + String((actual_RPM/60)*6.5*3.1415) + " Target RPM: " + String((target_RPM/60)*6.5*3.1415));
     traverse_v();
+  }
+  else if (cmd == 'c'){
+    cameraloop();
+    current_ID = getID();
+    Serial.println(current_ID);
+    if(current_ID == 0){
+      median_speed = 110;
+      traverse();
+    }
   }
 }
 
