@@ -157,8 +157,8 @@ void stopMotors() {
 
 //for go mode 
 void moveForward() {
-  SetSpeed('R', 100);
-  SetSpeed('L', 100);
+  SetSpeed('R', 85);
+  SetSpeed('L', 85);
 
 }
 
@@ -344,6 +344,47 @@ void traverse_v(){
       PrintOnce("something is wrong");
     }
   }
+
+void traverseT(){
+  //checking distance
+    checkdistance(); //runs US and displays distance on arduino
+    if(distance < 5){
+      stopMotors(); 
+      client.flush(); //clear transmisson and recieve stream
+      delay(200); //wait to clear transmisson and recieve stream
+      client.print("O"); //sending message to GUI on processor
+      //what to do when distance is less than 15cm
+      delay(200); //wait to update distance again.
+      displayDistance(); //display measured distance on Arduino LED panel
+      checkdistance(); //update distance again.
+    }
+    //if the bools left and right detected are off i.e IR sensors do not detect white lines, the motorforward command runs, motors turn at the same speed
+    if (forward()) {
+      //uses median_speed, updated via PID
+      moveForward();
+      PrintOnce("Moving forward");
+    }
+
+    //if condition to turn the buggy to the right
+    if (right()) {
+      moveRight();
+      PrintOnce("Turning Right");
+    }
+
+    //if condition to turn the buggy to the left
+    if (left()) {
+        moveLeft();
+        PrintOnce("Turning Left");
+    }
+
+    //if condition for when both the buggy's IR sensors detect white
+  if (white()) {
+      //moveForwardD();
+      stopMotors();
+      PrintOnce("something is wrong");
+    }
+  }
+  
 
 
 

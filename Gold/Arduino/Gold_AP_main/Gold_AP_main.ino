@@ -10,6 +10,7 @@ int timer;
 char cmd; 
 int current_ID;
 int previous_ID;
+int action_count = 0;
 
 
 void setup() {
@@ -146,13 +147,103 @@ void loop() {
     client.print("Current RPM" + String((actual_RPM/60)*6.5*3.1415) + " Target RPM: " + String((target_RPM/60)*6.5*3.1415));
     traverse_v();
   }
-  else if (cmd == 'c'){
+else if (cmd == 'c'){
+
     cameraloop();
-    current_ID = getID();
+      if(getID() != 0){
+        action_count = 1;
+        current_ID = getID();
+      }
+      
     Serial.println(current_ID);
     if(current_ID == 0){
-      median_speed = 110;
-      traverse();
+      traverseT();
+    }
+
+    else if (current_ID == 1){
+      traverseT();
+      if (white()){
+
+        while((digitalRead(LEYE)!=HIGH)){
+          moveRight();
+          action_count = 0;
+          current_ID = 0;
+        }
+      }
+    }
+    
+    else if (current_ID == 2){
+      traverseT();
+      if (white()){
+        while((digitalRead(REYE)==LOW)){
+          moveLeft();
+          action_count = 0;
+          current_ID = 0;
+        }
+      }
+    }
+
+    else if (current_ID == 3){
+      target_RPM = 59;
+      PIDcalculatev();
+      traverse_v();
+      action_count = 0;
+    }
+
+    else if (current_ID == 4){
+      target_RPM = 29;
+      PIDcalculatev();
+      traverse_v();
+      action_count = 0;
+    }
+
+    else if (current_ID == 5){
+      SetTargetRPM(49);
+      PIDcalculatev();
+      traverse_v();
+      action_count = 0;
+      Serial.print("Current RPM" + String((actual_RPM/60)*6.5*3.1415) + " Target RPM: " + String((target_RPM/60)*6.5*3.1415));
+    }
+
+    else if (current_ID == 6){
+      target_RPM = 59;
+      PIDcalculatev();
+      traverse_v();
+      action_count = 0;
+      
+    }
+
+    else if (current_ID == 7){
+      stopMotors();
+      delay(5000);
+      cameraloop();
+      current_ID = 0;
+      action_count = 0;
+    }
+
+    else if (current_ID == 8){
+      target_RPM = 29;
+      PIDcalculatev();
+      traverse_v();
+      action_count = 0;
+    }
+
+    else if (current_ID == 9){
+      analogWrite(CR, 100);
+      digitalWrite(RF, HIGH);
+      digitalWrite(RB, LOW);
+
+
+      analogWrite(CL, 100);
+      digitalWrite(LF, LOW);
+      digitalWrite(LB, HIGH);
+      delay(1000);
+      current_ID = 0;
+      action_count = 0;
+    }
+
+    if(action_count == 0){
+      previous_ID = current_ID;
     }
   }
 }

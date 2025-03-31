@@ -29,7 +29,7 @@ void camerasetup() {
     }
 
     Serial.println("HuskyLens connected successfully!");
-    huskylens.writeAlgorithm(ALGORITHM_OBJECT_TRACKING); // Set to Object Recognition mode
+    huskylens.writeAlgorithm(ALGORITHM_TAG_RECOGNITION); // Set to Object Recognition mode
 }
 
 String Temp = " ";
