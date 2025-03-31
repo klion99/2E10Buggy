@@ -153,15 +153,20 @@ else if (cmd == 'c'){
       if(getID() != 0){
         action_count = 1;
         current_ID = getID();
+
       }
       
     Serial.println(current_ID);
     if(current_ID == 0){
       traverseT();
+      client.flush();
+      client.print("Moving forward");
     }
 
     else if (current_ID == 1){
       traverseT();
+      client.flush();
+      client.print("Turning right at next junction");
       if (white()){
 
         while((digitalRead(LEYE)!=HIGH)){
@@ -174,6 +179,8 @@ else if (cmd == 'c'){
     
     else if (current_ID == 2){
       traverseT();
+      client.flush();
+      client.print("Turning left at next junction");
       if (white()){
         while((digitalRead(REYE)==LOW)){
           moveLeft();
@@ -184,6 +191,8 @@ else if (cmd == 'c'){
     }
 
     else if (current_ID == 3){
+      client.flush();
+      client.print("Max speed: 20cm/s");
       target_RPM = 59;
       PIDcalculatev();
       traverse_v();
@@ -191,29 +200,40 @@ else if (cmd == 'c'){
     }
 
     else if (current_ID == 4){
+      client.flush();
+      client.print("Min speed 10cm/s");
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
+      client.flush();
+      client.print("Current Speed" + String((actual_RPM/60)*6.5*3.1415) + " Target Speed: " + String((target_RPM/60)*6.5*3.1415));
     }
 
     else if (current_ID == 5){
-      SetTargetRPM(49);
+      client.flush();
+      client.print("Going 15cm/s");
+      target_RPM = 44;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
-      Serial.print("Current RPM" + String((actual_RPM/60)*6.5*3.1415) + " Target RPM: " + String((target_RPM/60)*6.5*3.1415));
+      client.flush();
+      client.print("Current Speed" + String((actual_RPM/60)*6.5*3.1415) + " Target Speed: " + String((target_RPM/60)*6.5*3.1415));
     }
 
     else if (current_ID == 6){
       target_RPM = 59;
+      client.flush();
+      client.print("Going 15cm/s");
       PIDcalculatev();
       traverse_v();
       action_count = 0;
-      
+      client.flush();
+      client.print("Current Speed" + String((actual_RPM/60)*6.5*3.1415) + " Target Speed: " + String((target_RPM/60)*6.5*3.1415));
     }
 
     else if (current_ID == 7){
+      client.print("Stop!");
       stopMotors();
       delay(5000);
       cameraloop();
@@ -223,12 +243,16 @@ else if (cmd == 'c'){
 
     else if (current_ID == 8){
       target_RPM = 29;
+      client.print("Going 10cm/s");
       PIDcalculatev();
       traverse_v();
       action_count = 0;
+      client.flush();
+      client.print("Current Speed" + String((actual_RPM/60)*6.5*3.1415) + " Target Speed: " + String((target_RPM/60)*6.5*3.1415));
     }
 
     else if (current_ID == 9){
+      client.print("Spinning time!");
       analogWrite(CR, 100);
       digitalWrite(RF, HIGH);
       digitalWrite(RB, LOW);
