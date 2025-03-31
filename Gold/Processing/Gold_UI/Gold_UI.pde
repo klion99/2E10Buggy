@@ -1,5 +1,6 @@
 import controlP5.*;
 import processing.net.*;
+import processing.sound.*;
 
 // Image declarations
 PImage Tencms_Limit;
@@ -15,6 +16,20 @@ PImage img;
 // Current sign variables
 PImage currentDirectionSign = null;
 PImage currentSpeedSign = null;
+
+// Sound declarations
+SoundFile buttonSound;
+SoundFile goSound;
+SoundFile stopSound;
+SoundFile pidSound;
+SoundFile trackingSound;
+SoundFile leftSound;
+SoundFile rightSound;
+SoundFile straightSound;
+SoundFile speed10Sound;
+SoundFile speed15Sound;
+SoundFile speed20Sound;
+SoundFile fullSpeedSound;
 
 ControlP5 cp5;
 int timer = 10;
@@ -42,6 +57,18 @@ void setup() {
   Straight = loadImage("Straight On.png"); 
   Left = loadImage("Turn Left.png");
   Right = loadImage("Turn Right.png");
+  
+  // Load sound files - replace these with your actual sound files
+  buttonSound = new SoundFile(this, "Button.mp3");
+  goSound = new SoundFile(this, "Go.mp3");
+  stopSound = new SoundFile(this, "Stop.mp3");
+  leftSound = new SoundFile(this, "Turn Left.mp3");
+  rightSound = new SoundFile(this, "Turn Right.mp3");
+  straightSound = new SoundFile(this, "Forward.mp3");
+  speed10Sound = new SoundFile(this, "TenCms.mp3");
+  speed15Sound = new SoundFile(this, "FifteenCms.mp3");
+  speed20Sound = new SoundFile(this, "TwentyCms.mp3");
+  fullSpeedSound = new SoundFile(this, "Full Speed.mp3");
   
   size(1200, 700);
 
@@ -203,24 +230,32 @@ void checkClientMessages() {
         leftArrowActive = true;
         rightArrowActive = false;
         currentDirectionSign = Left;
+        leftSound.play(); // Play turning left sound
       } else if (incomingMessage.equals("RIGHT")) {
         rightArrowActive = true;
         leftArrowActive = false;
         currentDirectionSign = Right;
+        rightSound.play(); // Play turning right sound
       } else if (incomingMessage.equals("STRAIGHT")) {
         leftArrowActive = false;
         rightArrowActive = false;
         currentDirectionSign = Straight;
+        straightSound.play(); // Play straight on sound
       } else if (incomingMessage.equals("STOP")) {
         currentDirectionSign = Stop;
+        stopSound.play(); // Play stop sound
       } else if (incomingMessage.equals("10CM")) {
         currentSpeedSign = Tencms_Limit;
+        speed10Sound.play(); // Play speed limit 10 sound
       } else if (incomingMessage.equals("15CM")) {
         currentSpeedSign = Fifteencms_Limit;
+        speed15Sound.play(); // Play speed limit 15 sound
       } else if (incomingMessage.equals("20CM")) {
         currentSpeedSign = Twentycms_Limit;
+        speed20Sound.play(); // Play speed limit 20 sound
       } else if (incomingMessage.equals("FULLSPEED")) {
         currentSpeedSign = FullSpeed;
+        fullSpeedSound.play(); // Play full speed sound
       }
     }
   }
@@ -228,34 +263,43 @@ void checkClientMessages() {
 
 // Button control functions
 void Go() {
+  buttonSound.play(); // Play button press sound
   message = "C"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Go With Camera\n");
+  goSound.play(); // Play go with camera sound
 }
 
 void Stop() {
+  buttonSound.play(); // Play button press sound
   message = "S"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Halt\n");
+  stopSound.play(); // Play stop sound
 }
 
 void Go_With_PID() {
+  buttonSound.play(); // Play button press sound
   message = "P"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Go with PID\n");
+  goSound.play(); // Play go with PID sound
 }
 
 void Simple_Tracking() {
+  buttonSound.play(); // Play button press sound
   message = "T"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Simple Tracking Underway \n");
+  goSound.play(); // Play simple tracking sound
 }
 
 void Speed(int value) {
+ 
   // Create a char array to hold the formatted string (e.g., "V009" or "V024")
   char[] buffer = new char[5]; // 5 characters: 'V', 3 digits, and a null terminator
 
@@ -279,4 +323,15 @@ void Speed(int value) {
 
   // Log the sent message
   dialogueTextarea.append("Sent: " + new String(buffer) + "\n");
+  
+  // Play appropriate speed sound based on value
+  if (value <= 40) {
+    speed10Sound.play();
+  } else if (value <= 80) {
+    speed15Sound.play();
+  } else if (value < 120) {
+    speed20Sound.play();
+  } else {
+    fullSpeedSound.play();
+  }
 }
