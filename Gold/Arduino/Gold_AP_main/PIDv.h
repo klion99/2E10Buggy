@@ -5,7 +5,7 @@
 #include <Arduino.h>
 
 
-float target_RPM; 
+float target_RPM= 70; 
 int actual_RPM; 
 int actual_rpm_R;
 int actual_rpm_L; 
@@ -30,11 +30,6 @@ double kdv;
 double max_derivativev = 1000; 
 int time_for_rpm_calc = 200; 
 int update = 200;
-
-
-void SetTargetRPM(int target){
-  target_RPM = target;
-}
 
 void SetConstantsv(double KP = 1,double KI = 1,double KD = 1){
   kpv = KP;
@@ -111,14 +106,14 @@ void PIDcalculatev(){
 
     SetSpeedPIDv(velocity_PWMv);
 
-/*     Serial.print(velocity_PWMv);
+    Serial.print(velocity_PWMv);
     Serial.print(", ");
     Serial.print(actual_RPM); 
     Serial.print(", ");
     Serial.print(median_speedv); 
-    Serial.println(", "); */
+    Serial.println(", ");
 
-    if(right() || left()) {
+    if(right() || left()){
       actual_RPM = target_RPM;
     }
   }
