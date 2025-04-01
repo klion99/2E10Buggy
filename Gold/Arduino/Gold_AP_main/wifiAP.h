@@ -75,7 +75,7 @@ void Wifiloop() {
         }
 
         //updating the command variable for start and stop, ignoring any other data being sent.     
-        if(recieve == 'g' || recieve == 's' || recieve == 't' || recieve == 'u'){
+        if(recieve == 'g' || recieve == 's' || recieve == 't' || recieve == 'u'|| recieve == 'c'){
           command = recieve;
           break;
         }

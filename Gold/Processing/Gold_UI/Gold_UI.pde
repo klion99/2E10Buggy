@@ -218,6 +218,10 @@ void updateFlashState() {
 }
 
 void checkClientMessages() {
+    if(millis()>timer){
+    myClient.write(message);
+    timer = timer+100;
+  }
   // Check for incoming messages from the Arduino
   if (myClient.available() > 0) {
     String incomingMessage = myClient.readStringUntil('\n');
@@ -250,7 +254,7 @@ void checkClientMessages() {
       } else if (incomingMessage.equals("15CM")) {
         currentSpeedSign = Fifteencms_Limit;
         speed15Sound.play(); // Play speed limit 15 sound
-      } else if (incomingMessage.equals("20CM")) {
+      } else if (incomingMessage.equals("20CMF")) {
         currentSpeedSign = Twentycms_Limit;
         speed20Sound.play(); // Play speed limit 20 sound
       } else if (incomingMessage.equals("FULLSPEED")) {
@@ -264,7 +268,7 @@ void checkClientMessages() {
 // Button control functions
 void Go() {
   buttonSound.play(); // Play button press sound
-  message = "C"; // Message to send to Arduino
+  message = "c"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Go With Camera\n");
@@ -273,7 +277,7 @@ void Go() {
 
 void Stop() {
   buttonSound.play(); // Play button press sound
-  message = "S"; // Message to send to Arduino
+  message = "s"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Halt\n");
@@ -282,7 +286,7 @@ void Stop() {
 
 void Go_With_PID() {
   buttonSound.play(); // Play button press sound
-  message = "P"; // Message to send to Arduino
+  message = "u"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Sent: Go with PID\n");
@@ -291,7 +295,7 @@ void Go_With_PID() {
 
 void Simple_Tracking() {
   buttonSound.play(); // Play button press sound
-  message = "T"; // Message to send to Arduino
+  message = "t"; // Message to send to Arduino
   myClient.write(message);
   println(message);
   dialogueTextarea.append("Simple Tracking Underway \n");
