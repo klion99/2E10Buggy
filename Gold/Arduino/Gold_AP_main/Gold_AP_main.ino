@@ -147,8 +147,7 @@ void loop() {
     client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     traverse_v();
   }
-else if (cmd == 'c'){
-
+else if (cmd == 'c') {
     cameraloop();
       if(getID() != 0){
         action_count = 1;
@@ -180,6 +179,7 @@ else if (cmd == 'c'){
       traverseT();
       client.flush();
       client.print("LEFT");
+
       if (white()){
         while((digitalRead(REYE)==LOW)){
           moveLeft();
@@ -196,45 +196,45 @@ else if (cmd == 'c'){
       PIDcalculatev();
       traverse_v();
       action_count = 0;
+      client.flush();
+      delay(20);
+      client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     }
 
     else if (current_ID == 4){
-      if(action_count == 1){
         client.flush();
         client.print("10CM");
-      }
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
       client.flush();
-    client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      delay(20);
+      client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     }
 
     else if (current_ID == 5){
-      if(action_count == 1){
         client.flush();
         client.print("15CM");
-      }
       target_RPM = 44;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
       client.flush();
-     client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      delay(20);
+      client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     }
 
     else if (current_ID == 6){
-      if(action_count == 1){
         client.flush();
         client.print("20CM");
-      }
       target_RPM = 59;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
       client.flush();
-      client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      delay(20);
+      client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     }
 
     else if (current_ID == 7){
@@ -247,16 +247,14 @@ else if (cmd == 'c'){
     }
 
     else if (current_ID == 8){
-      if(action_count == 1){
         client.flush();
         client.print("10CM");
-      }
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
       action_count = 0;
       client.flush();
-      client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     }
 
     else if (current_ID == 9){

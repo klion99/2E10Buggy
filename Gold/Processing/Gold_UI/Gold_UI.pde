@@ -34,6 +34,7 @@ SoundFile fullSpeedSound;
 ControlP5 cp5;
 int timer = 10;
 String message = "";
+String prevMessage = "";
 String ip = "192.168.4.1"; // Replace with your Arduino's IP
 Client myClient; // Client object to send data to the Arduino
 Knob ControlKnob;
@@ -219,47 +220,57 @@ void updateFlashState() {
 
 void checkClientMessages() {
     if(millis()>timer){
-    myClient.write(message);
-    timer = timer+100;
+      myClient.write(message);
+      timer = timer+100;
   }
   // Check for incoming messages from the Arduino
   if (myClient.available() > 0) {
-    String incomingMessage = myClient.readStringUntil('\n');
+    String incomingMessage = myClient.readString();
     if (incomingMessage != null) {
       incomingMessage = incomingMessage.trim();
-      dialogueTextarea.setText("Received: " + incomingMessage + "\n" + dialogueTextarea.getText());
+      if(incomingMessage.startsWith("V")){
+        dialogueTextarea.setText("Received: " + incomingMessage.substring(1) + "\n" + dialogueTextarea.getText());
+        incomingMessage = "nn";  
+    }
+      else{dialogueTextarea.setText("Received: " + incomingMessage + "\n" + dialogueTextarea.getText());}
       
       // Parse the message to control the arrows and signs
-      if (incomingMessage.equals("LEFT")) {
-        leftArrowActive = true;
-        rightArrowActive = false;
-        currentDirectionSign = Left;
-        leftSound.play(); // Play turning left sound
-      } else if (incomingMessage.equals("RIGHT")) {
-        rightArrowActive = true;
-        leftArrowActive = false;
-        currentDirectionSign = Right;
-        rightSound.play(); // Play turning right sound
-      } else if (incomingMessage.equals("STRAIGHT")) {
-        leftArrowActive = false;
-        rightArrowActive = false;
-        currentDirectionSign = Straight;
-        straightSound.play(); // Play straight on sound
-      } else if (incomingMessage.equals("STOP")) {
-        currentDirectionSign = Stop;
-        stopSound.play(); // Play stop sound
-      } else if (incomingMessage.equals("10CM")) {
-        currentSpeedSign = Tencms_Limit;
-        speed10Sound.play(); // Play speed limit 10 sound
-      } else if (incomingMessage.equals("15CM")) {
-        currentSpeedSign = Fifteencms_Limit;
-        speed15Sound.play(); // Play speed limit 15 sound
-      } else if (incomingMessage.equals("20CMF")) {
-        currentSpeedSign = Twentycms_Limit;
-        speed20Sound.play(); // Play speed limit 20 sound
-      } else if (incomingMessage.equals("FULLSPEED")) {
-        currentSpeedSign = FullSpeed;
-        fullSpeedSound.play(); // Play full speed sound
+      if(incomingMessage.equals("nn") == false){
+      if(!incomingMessage.equals(prevMessage)){
+          prevMessage = incomingMessage;
+          if (incomingMessage.equals("LEFT")) {
+            leftArrowActive = true;
+            rightArrowActive = false;
+            currentDirectionSign = Left;
+            leftSound.play(); // Play turning left sound
+          } else if (incomingMessage.equals("RIGHT")) {
+            rightArrowActive = true;
+            leftArrowActive = false;
+            currentDirectionSign = Right;
+            rightSound.play(); // Play turning right sound
+          } else if (incomingMessage.equals("STRAIGHT")) {
+            leftArrowActive = false;
+            rightArrowActive = false;
+            currentDirectionSign = Straight;
+            straightSound.play(); // Play straight on sound
+          } else if (incomingMessage.equals("STOP")) {
+            currentDirectionSign = Stop;
+            stopSound.play(); // Play stop sound
+          } else if (incomingMessage.equals("10CM")) {
+            currentSpeedSign = Tencms_Limit;
+            speed10Sound.play(); // Play speed limit 10 sound
+          } else if (incomingMessage.equals("15CM")) {
+            currentSpeedSign = Fifteencms_Limit;
+            speed15Sound.play(); // Play speed limit 15 sound
+          } else if (incomingMessage.equals("20CMF")) {
+            currentSpeedSign = Twentycms_Limit;
+            speed20Sound.play(); // Play speed limit 20 sound
+          } else if (incomingMessage.equals("FULLSPEED")) {
+            currentSpeedSign = FullSpeed;
+            fullSpeedSound.play(); // Play full speed sound
+          }
+        myClient.clear();  // Discards all incoming data
+        }
       }
     }
   }
