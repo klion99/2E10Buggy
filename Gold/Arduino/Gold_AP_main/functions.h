@@ -174,6 +174,17 @@ void moveForwardv() {
   SetSpeed('L', median_speedv);
 }
 
+void spin() {
+  analogWrite(CR, 100);
+  digitalWrite(RF, HIGH);
+  digitalWrite(RB, LOW);
+  
+  analogWrite(CL, 100);
+  digitalWrite(LF, LOW);
+  digitalWrite(LB, HIGH);
+  delay(1100);
+}
+
 
 
 //function which updates the distance variable for checking distance

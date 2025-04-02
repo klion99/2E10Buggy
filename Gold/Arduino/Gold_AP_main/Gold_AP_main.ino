@@ -11,9 +11,8 @@ char cmd;
 int current_ID;
 int previous_ID;
 int action_count = 0;
-int spin_count_R = 0;
-int spin_count_L = 0;
-int turncount = 0;
+bool spin_count = false;
+
 
 
 void setup() {
@@ -150,15 +149,16 @@ void loop() {
     client.print("Current Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
     traverse_v();
   }
-else if (cmd == 'c') {
+  else if (cmd == 'c') {
     cameraloop();
-      if(getID() != 0){
+
+    if(getID() != 0){
         action_count = 1;
         current_ID = getID();
-
       }
       
     Serial.println(current_ID);
+
     if(current_ID == 0){
       traverseT();
       client.flush();
@@ -205,8 +205,8 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 4){
-        client.flush();
-        client.print("10CM");
+      client.flush();
+      client.print("10CM");
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
@@ -217,8 +217,8 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 5){
-        client.flush();
-        client.print("15CM");
+      client.flush();
+      client.print("15CM");
       target_RPM = 44;
       PIDcalculatev();
       traverse_v();
@@ -229,8 +229,8 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 6){
-        client.flush();
-        client.print("20CM");
+      client.flush();
+      client.print("20CM");
       target_RPM = 59;
       PIDcalculatev();
       traverse_v();
@@ -250,8 +250,8 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 8){
-        client.flush();
-        client.print("10CM");
+      client.flush();
+      client.print("10CM");
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
@@ -261,37 +261,42 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 9){
-      /* while((spin_count_L < 1) && (spin_count_R < 1)){ */
+      client.flush();
+      client.print("WEEEE");
 
-/*         if(digitalRead(LEYE) == (HIGH)){
-        spin_count_L = spin_count_L + 1;
-        }
-
-        if(digitalRead(LEYE) == (HIGH)){
-          spin_count_R = spin_count_R + 1;
-        } */
-      if(turncount < 1){
-        client.print("WEEEE");
-        analogWrite(CR, 100);
-        digitalWrite(RF, HIGH);
-        digitalWrite(RB, LOW);
-        
-        analogWrite(CL, 100);
-        digitalWrite(LF, LOW);
-        digitalWrite(LB, HIGH);
-        delay(1100);
-        turncount = turncount + 1;
+      if(!spin_count){
+        spin();
+        spin_count = true;
       }
-        traverse();
-        if (white()){
+
+      traverse();
+      if (white()) {
         while((digitalRead(LEYE)!=HIGH)){
           moveRight();
           action_count = 0;
           current_ID = 0;
-          turncount = 0;
+          spin_count = false;
         }
+      }
+    }
+
+    else if (current_ID == 10){
+      client.flush();
+      client.print("WEEEE");
+      if(!spin_count){
+        spin();
+        spin_count = true;
+      }
+
+      traverse();
+      if (white()) {
+        while((digitalRead(REYE)== LOW)){
+          moveLeft();
+          action_count = 0;
+          current_ID = 0;
+          spin_count = false;
         }
-      //}
+      }
     }
 
     if(action_count == 0){
