@@ -11,6 +11,9 @@ char cmd;
 int current_ID;
 int previous_ID;
 int action_count = 0;
+int spin_count_R = 0;
+int spin_count_L = 0;
+int turncount = 0;
 
 
 void setup() {
@@ -258,17 +261,37 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 9){
-      client.print("WEEEE");
-      analogWrite(CR, 100);
-      digitalWrite(RF, HIGH);
-      digitalWrite(RB, LOW);
-      
-      analogWrite(CL, 100);
-      digitalWrite(LF, LOW);
-      digitalWrite(LB, HIGH);
-      delay(1100);
-      current_ID = 0;
-      action_count = 0;
+      /* while((spin_count_L < 1) && (spin_count_R < 1)){ */
+
+/*         if(digitalRead(LEYE) == (HIGH)){
+        spin_count_L = spin_count_L + 1;
+        }
+
+        if(digitalRead(LEYE) == (HIGH)){
+          spin_count_R = spin_count_R + 1;
+        } */
+      if(turncount < 1){
+        client.print("WEEEE");
+        analogWrite(CR, 100);
+        digitalWrite(RF, HIGH);
+        digitalWrite(RB, LOW);
+        
+        analogWrite(CL, 100);
+        digitalWrite(LF, LOW);
+        digitalWrite(LB, HIGH);
+        delay(1100);
+        turncount = turncount + 1;
+      }
+        traverse();
+        if (white()){
+        while((digitalRead(LEYE)!=HIGH)){
+          moveRight();
+          action_count = 0;
+          current_ID = 0;
+          turncount = 0;
+        }
+        }
+      //}
     }
 
     if(action_count == 0){
