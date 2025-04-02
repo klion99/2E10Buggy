@@ -258,7 +258,7 @@ else if (cmd == 'c') {
     }
 
     else if (current_ID == 9){
-      client.print("Spinning time!");
+      client.print("WEEEE");
       analogWrite(CR, 100);
       digitalWrite(RF, HIGH);
       digitalWrite(RB, LOW);
@@ -266,7 +266,7 @@ else if (cmd == 'c') {
       analogWrite(CL, 100);
       digitalWrite(LF, LOW);
       digitalWrite(LB, HIGH);
-      delay(1500);
+      delay(1100);
       current_ID = 0;
       action_count = 0;
     }
