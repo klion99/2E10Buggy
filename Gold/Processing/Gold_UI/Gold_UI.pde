@@ -12,6 +12,8 @@ PImage Straight;
 PImage Left;
 PImage Right;
 PImage img;
+PImage Linda_Doyle;
+PImage Roundabout;
 
 // Current sign variables
 PImage currentDirectionSign = null;
@@ -30,6 +32,8 @@ SoundFile speed10Sound;
 SoundFile speed15Sound;
 SoundFile speed20Sound;
 SoundFile fullSpeedSound;
+SoundFile hairpin;
+SoundFile Roundabout;
 
 ControlP5 cp5;
 int timer = 10;
@@ -39,6 +43,7 @@ String ip = "192.168.4.1"; // Replace with your Arduino's IP
 Client myClient; // Client object to send data to the Arduino
 Knob ControlKnob;
 Textarea dialogueTextarea;
+Textarea speedTextarea; // New textarea for speed information
 
 // Variables for arrow flashing
 boolean leftArrowActive = false;
@@ -46,6 +51,10 @@ boolean rightArrowActive = false;
 int flashInterval = 500; // milliseconds between flashes
 int lastFlashTime = 0;
 boolean flashState = false;
+
+// Variables for speed tracking
+String currentSpeed = "0";
+String targetSpeed = "0";
 
 void setup() {
   // Load images
@@ -58,6 +67,8 @@ void setup() {
   Straight = loadImage("Straight On.png"); 
   Left = loadImage("Turn Left.png");
   Right = loadImage("Turn Right.png");
+  Linda_Doyle = loadImage("Linda_Doyle.png");
+  Roundabout = loadImage("Roundabout.png");
   
   // Load sound files - replace these with your actual sound files
   buttonSound = new SoundFile(this, "Button.mp3");
@@ -70,6 +81,8 @@ void setup() {
   speed15Sound = new SoundFile(this, "FifteenCms.mp3");
   speed20Sound = new SoundFile(this, "TwentyCms.mp3");
   fullSpeedSound = new SoundFile(this, "Full Speed.mp3");
+  hairpinSound = new SoundFile(this, "hairpin.mp3"); 
+  roundaboutSound = new SoundFile(this, "Roundabout.mp3");
   
   size(1200, 700);
 
@@ -125,16 +138,29 @@ void setup() {
                .setRadius(62.5)
                .setDragDirection(Knob.HORIZONTAL);
                
-   // Add a text area for the odometer
+   // Add a text area for the dialogue
    dialogueTextarea = cp5.addTextarea("dialogue")
                    .setPosition(352.5, 500)
-                   .setSize(500, 150)
+                   .setSize(500, 100)
                    .setFont(createFont("Arial", 12))
                    .setColorBackground(color(0, 0, 0, 50))
                    .setColorForeground(color(255, 255, 255, 200))
                    .setColorActive(color(255, 255, 255, 255))
                    .setLabel("Dialogue")
-                   .setText("Dialgue will appear here \n")
+                   .setText("Dialogue will appear here \n")
+                   .setScrollBackground(color(0, 0, 0, 100))
+                   .setScrollForeground(color(255, 255, 255, 200));
+                   
+   // Add a text area for speed information
+   speedTextarea = cp5.addTextarea("speedInfo")
+                   .setPosition(352.5, 620)
+                   .setSize(500, 50)
+                   .setFont(createFont("Arial", 12))
+                   .setColorBackground(color(0, 0, 0, 50))
+                   .setColorForeground(color(255, 255, 255, 200))
+                   .setColorActive(color(255, 255, 255, 255))
+                   .setLabel("Speed Information")
+                   .setText("Current Speed: 0 cm/s\nTarget Speed: 0 cm/s")
                    .setScrollBackground(color(0, 0, 0, 100))
                    .setScrollForeground(color(255, 255, 255, 200));
 }
@@ -181,6 +207,9 @@ void draw() {
   } else {
     drawInactiveArrow(width - 100, 50, false); // Right arrow (flashing off or inactive)
   }
+  
+  // Update speed display
+  speedTextarea.setText("Current Speed: " + currentSpeed + " cm/s\nTarget Speed: " + targetSpeed + " cm/s");
 }
 
 void drawActiveArrow(float x, float y, boolean left) {
@@ -228,16 +257,30 @@ void checkClientMessages() {
     String incomingMessage = myClient.readString();
     if (incomingMessage != null) {
       incomingMessage = incomingMessage.trim();
-      if(incomingMessage.startsWith("V")){
-        dialogueTextarea.setText("Received: " + incomingMessage.substring(1) + "\n" + dialogueTextarea.getText());
-        incomingMessage = "nn";  
-    }
-      else{dialogueTextarea.setText("Received: " + incomingMessage + "\n" + dialogueTextarea.getText());}
       
-      // Parse the message to control the arrows and signs
-      if(incomingMessage.equals("nn") == false){
-      if(!incomingMessage.equals(prevMessage)){
+      // Check for speed information (format: "SPEED:current,target")
+      if(incomingMessage.startsWith("SPEED:")) {
+        String[] speedParts = incomingMessage.substring(6).split(",");
+        if(speedParts.length == 2) {
+          currentSpeed = speedParts[0];
+          targetSpeed = speedParts[1];
+        }
+      }
+      // Check for voltage information
+      else if(incomingMessage.startsWith("V")){
+        // Only update if message is different from previous
+        if(!incomingMessage.equals(prevMessage)) {
+          dialogueTextarea.setText("Voltage: " + incomingMessage.substring(1) + "\n");
           prevMessage = incomingMessage;
+        }
+      }
+      else {
+        // Only update if message is different from previous
+        if(!incomingMessage.equals(prevMessage)) {
+          dialogueTextarea.setText("Received: " + incomingMessage + "\n");
+          prevMessage = incomingMessage;
+          
+          // Parse the message to control the arrows and signs
           if (incomingMessage.equals("LEFT")) {
             leftArrowActive = true;
             rightArrowActive = false;
@@ -268,10 +311,16 @@ void checkClientMessages() {
           } else if (incomingMessage.equals("FULLSPEED")) {
             currentSpeedSign = FullSpeed;
             fullSpeedSound.play(); // Play full speed sound
+          } else if (incomingMessage.equals("WEEE")) {
+            currentSpeedSign = Roundabout;
+            roundaboutSound.play(); // Play roundabout sound
+          } else if (incomingMessage.equals("Hairpin")) {
+            currentSpeedSign = Linda_Doyle;
+            hairpin.play(); // Play hairpin sound
           }
-        myClient.clear();  // Discards all incoming data
         }
       }
+      myClient.clear();  // Discards all incoming data
     }
   }
 }
@@ -282,7 +331,7 @@ void Go() {
   message = "c"; // Message to send to Arduino
   myClient.write(message);
   println(message);
-  dialogueTextarea.append("Sent: Go With Camera\n");
+  dialogueTextarea.setText("Sent: Go With Camera\n");
   goSound.play(); // Play go with camera sound
 }
 
@@ -291,7 +340,7 @@ void Stop() {
   message = "s"; // Message to send to Arduino
   myClient.write(message);
   println(message);
-  dialogueTextarea.append("Sent: Halt\n");
+  dialogueTextarea.setText("Sent: Halt\n");
   stopSound.play(); // Play stop sound
 }
 
@@ -300,7 +349,7 @@ void Go_With_PID() {
   message = "u"; // Message to send to Arduino
   myClient.write(message);
   println(message);
-  dialogueTextarea.append("Sent: Go with PID\n");
+  dialogueTextarea.setText("Sent: Go with PID\n");
   goSound.play(); // Play go with PID sound
 }
 
@@ -309,12 +358,11 @@ void Simple_Tracking() {
   message = "t"; // Message to send to Arduino
   myClient.write(message);
   println(message);
-  dialogueTextarea.append("Simple Tracking Underway \n");
+  dialogueTextarea.setText("Simple Tracking Underway\n");
   goSound.play(); // Play simple tracking sound
 }
 
 void Speed(int value) {
- 
   // Create a char array to hold the formatted string (e.g., "V009" or "V024")
   char[] buffer = new char[5]; // 5 characters: 'V', 3 digits, and a null terminator
 
@@ -337,7 +385,10 @@ void Speed(int value) {
   myClient.clear();
 
   // Log the sent message
-  dialogueTextarea.append("Sent: " + new String(buffer) + "\n");
+  dialogueTextarea.setText("Sent: " + new String(buffer) + "\n");
+  
+  // Update target speed display
+  targetSpeed = str(value);
   
   // Play appropriate speed sound based on value
   if (value <= 40) {
