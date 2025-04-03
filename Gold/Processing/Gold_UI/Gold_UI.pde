@@ -39,6 +39,7 @@ ControlP5 cp5;
 int timer = 10;
 String message = "";
 String prevMessage = "";
+String prevMessageV = "";
 String ip = "192.168.4.1"; // Replace with your Arduino's IP
 Client myClient; // Client object to send data to the Arduino
 Knob ControlKnob;
@@ -269,9 +270,10 @@ void checkClientMessages() {
       // Check for voltage information
       else if(incomingMessage.startsWith("V")){
         // Only update if message is different from previous
-        if(!incomingMessage.equals(prevMessage)) {
+        if(!incomingMessage.equals(prevMessageV)) {
           dialogueTextarea.setText("Voltage: " + incomingMessage.substring(1) + "\n");
-          prevMessage = incomingMessage;
+          prevMessageV = incomingMessage;
+          incomingMessage = "nn";
         }
       }
       else {
