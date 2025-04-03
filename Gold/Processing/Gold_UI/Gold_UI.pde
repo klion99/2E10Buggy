@@ -32,8 +32,8 @@ SoundFile speed10Sound;
 SoundFile speed15Sound;
 SoundFile speed20Sound;
 SoundFile fullSpeedSound;
-SoundFile hairpin;
-SoundFile Roundabout;
+SoundFile hairpinSound;
+SoundFile roundaboutSound;
 
 ControlP5 cp5;
 int timer = 10;
@@ -316,7 +316,7 @@ void checkClientMessages() {
             roundaboutSound.play(); // Play roundabout sound
           } else if (incomingMessage.equals("Hairpin")) {
             currentSpeedSign = Linda_Doyle;
-            hairpin.play(); // Play hairpin sound
+            hairpinSound.play(); // Play hairpin sound
           }
         }
       }
