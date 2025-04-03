@@ -39,7 +39,7 @@ ControlP5 cp5;
 int timer = 10;
 String message = "";
 String prevMessage = "";
-String prevMessageV = "";
+String incomingMessage = "";
 String ip = "192.168.4.1"; // Replace with your Arduino's IP
 Client myClient; // Client object to send data to the Arduino
 Knob ControlKnob;
@@ -161,7 +161,7 @@ void setup() {
                    .setColorForeground(color(255, 255, 255, 200))
                    .setColorActive(color(255, 255, 255, 255))
                    .setLabel("Speed Information")
-                   .setText("Current Speed: 0 cm/s\nTarget Speed: 0 cm/s")
+                   .setText("Speed info will show here \n")
                    .setScrollBackground(color(0, 0, 0, 100))
                    .setScrollForeground(color(255, 255, 255, 200));
 }
@@ -210,8 +210,7 @@ void draw() {
   }
   
   // Update speed display
-  speedTextarea.setText("Current Speed: " + currentSpeed + " cm/s\nTarget Speed: " + targetSpeed + " cm/s");
-}
+  }
 
 void drawActiveArrow(float x, float y, boolean left) {
   fill(0, 255, 0); // Green for active
@@ -258,31 +257,15 @@ void checkClientMessages() {
     String incomingMessage = myClient.readString();
     if (incomingMessage != null) {
       incomingMessage = incomingMessage.trim();
-      
-      // Check for speed information (format: "SPEED:current,target")
-      if(incomingMessage.startsWith("SPEED:")) {
-        String[] speedParts = incomingMessage.substring(6).split(",");
-        if(speedParts.length == 2) {
-          currentSpeed = speedParts[0];
-          targetSpeed = speedParts[1];
-        }
-      }
-      // Check for voltage information
-      else if(incomingMessage.startsWith("V")){
-        // Only update if message is different from previous
-        if(!incomingMessage.equals(prevMessageV)) {
-          dialogueTextarea.setText("Voltage: " + incomingMessage.substring(1) + "\n");
-          prevMessageV = incomingMessage;
-          incomingMessage = "nn";
-        }
-      }
-      else {
-        // Only update if message is different from previous
-        if(!incomingMessage.equals(prevMessage)) {
-          dialogueTextarea.setText("Received: " + incomingMessage + "\n");
-          prevMessage = incomingMessage;
-          
-          // Parse the message to control the arrows and signs
+      if(incomingMessage.startsWith("V")){
+        speedTextarea.setText(incomingMessage.substring(1) + "\n");
+        incomingMessage = "nn";  
+    }
+      else{dialogueTextarea.setText("Received: " + incomingMessage + "\n" + dialogueTextarea.getText());}
+      // Parse the message to control the arrows and signs
+      if(incomingMessage.equals("nn") == false){
+      if(!incomingMessage.equals(prevMessage)){
+          prevMessage = incomingMessage;        // Parse the message to control the arrows and signs
           if (incomingMessage.equals("LEFT")) {
             leftArrowActive = true;
             rightArrowActive = false;
@@ -307,15 +290,13 @@ void checkClientMessages() {
           } else if (incomingMessage.equals("15CM")) {
             currentSpeedSign = Fifteencms_Limit;
             speed15Sound.play(); // Play speed limit 15 sound
-          } else if (incomingMessage.equals("20CMF")) {
+          } else if (incomingMessage.equals("20CM")) {
             currentSpeedSign = Twentycms_Limit;
             speed20Sound.play(); // Play speed limit 20 sound
-          } else if (incomingMessage.equals("FULLSPEED")) {
-            currentSpeedSign = FullSpeed;
+          } else if (incomingMessage.equals("20CMF")) {
+            currentDirectionSign = FullSpeed;
+            currentSpeedSign = Twentycms_Limit;
             fullSpeedSound.play(); // Play full speed sound
-          } else if (incomingMessage.equals("WEEE")) {
-            currentSpeedSign = Roundabout;
-            roundaboutSound.play(); // Play roundabout sound
           } else if (incomingMessage.equals("Hairpin")) {
             currentSpeedSign = Linda_Doyle;
             hairpinSound.play(); // Play hairpin sound
@@ -326,6 +307,7 @@ void checkClientMessages() {
     }
   }
 }
+
 
 // Button control functions
 void Go() {

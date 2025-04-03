@@ -194,7 +194,7 @@ void loop() {
 
     else if (current_ID == 3){
       client.flush();
-      client.print("20CMF");
+      client.print("20CMF \n");
       target_RPM = 59;
       PIDcalculatev();
       traverse_v();
@@ -206,7 +206,7 @@ void loop() {
 
     else if (current_ID == 4){
       client.flush();
-      client.print("10CM");
+      client.print("10CM \n");
       target_RPM = 29;
       PIDcalculatev();
       traverse_v();
@@ -218,7 +218,7 @@ void loop() {
 
     else if (current_ID == 5){
       client.flush();
-      client.print("15CM");
+      client.print("15CM \n");
       target_RPM = 44;
       PIDcalculatev();
       traverse_v();
@@ -230,7 +230,7 @@ void loop() {
 
     else if (current_ID == 6){
       client.flush();
-      client.print("20CM");
+      client.print("20CM \n");
       target_RPM = 59;
       PIDcalculatev();
       traverse_v();
@@ -262,7 +262,7 @@ void loop() {
 
     else if (current_ID == 9){
       client.flush();
-      client.print("WEEEE");
+      client.print("Hairpin");
 
       if(!spin_count){
         spin();
@@ -282,7 +282,7 @@ void loop() {
 
     else if (current_ID == 10){
       client.flush();
-      client.print("WEEEE");
+      client.print("Hairpin");
       if(!spin_count){
         spin();
         spin_count = true;
