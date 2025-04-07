@@ -106,12 +106,12 @@ void PIDcalculatev(){
 
     SetSpeedPIDv(velocity_PWMv);
 
-    Serial.print(velocity_PWMv);
+/*     Serial.print(velocity_PWMv);
     Serial.print(", ");
     Serial.print(actual_RPM); 
     Serial.print(", ");
     Serial.print(median_speedv); 
-    Serial.println(", ");
+    Serial.println(", "); */
 
     if(right() || left()){
       actual_RPM = target_RPM;

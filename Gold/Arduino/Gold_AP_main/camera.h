@@ -47,7 +47,7 @@ void cameraloop() {
                 Serial.print(", Y: "); Serial.print(result.yCenter);*/
                 size_irl = result.width * result.height;
                 Serial.println(size_irl);
-              if(size_irl < 800){
+              if(size_irl > 4000){
                 ID = result.ID;
               }
             }

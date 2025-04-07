@@ -12,7 +12,8 @@ PImage Straight;
 PImage Left;
 PImage Right;
 PImage img;
-PImage Linda_Doyle;
+PImage Linda_DoyleL;
+PImage Linda_DoyleR;
 PImage Roundabout;
 
 // Current sign variables
@@ -68,7 +69,8 @@ void setup() {
   Straight = loadImage("Straight On.png"); 
   Left = loadImage("Turn Left.png");
   Right = loadImage("Turn Right.png");
-  Linda_Doyle = loadImage("Linda_Doyle.png");
+  Linda_DoyleR = loadImage("Linda_DoyleR.png");
+  Linda_DoyleL = loadImage("Linda_DoyleL.png");
   Roundabout = loadImage("Roundabout.png");
   
   // Load sound files - replace these with your actual sound files
@@ -297,8 +299,11 @@ void checkClientMessages() {
             currentDirectionSign = FullSpeed;
             currentSpeedSign = Twentycms_Limit;
             fullSpeedSound.play(); // Play full speed sound
-          } else if (incomingMessage.equals("Hairpin")) {
-            currentSpeedSign = Linda_Doyle;
+          } else if (incomingMessage.equals("HairpinR")) {
+            currentSpeedSign = Linda_DoyleR;
+            hairpinSound.play(); // Play hairpin sound
+          } else if (incomingMessage.equals("HairpinL")) {
+            currentSpeedSign = Linda_DoyleL;
             hairpinSound.play(); // Play hairpin sound
           }
         }

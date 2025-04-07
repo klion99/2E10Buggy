@@ -12,7 +12,7 @@ int current_ID;
 int previous_ID;
 int action_count = 0;
 bool spin_count = false;
-
+int stop_time;
 
 
 void setup() {
@@ -155,9 +155,9 @@ void loop() {
     if(getID() != 0){
         action_count = 1;
         current_ID = getID();
-      }
+    }
       
-    Serial.println(current_ID);
+    //Serial.println(current_ID);
 
     if(current_ID == 0){
       traverseT();
@@ -180,6 +180,7 @@ void loop() {
           moveRight();
           action_count = 0;
           current_ID = 0;
+          previous_ID = 1;
         }
       }
     }
@@ -194,6 +195,7 @@ void loop() {
           moveLeft();
           action_count = 0;
           current_ID = 0;
+          previous_ID = 2;
         }
       }
     }
@@ -208,6 +210,7 @@ void loop() {
       client.flush();
       delay(20);
       client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      previous_ID = 3;
     }
 
     else if (current_ID == 4){
@@ -220,6 +223,7 @@ void loop() {
       client.flush();
       delay(20);
       client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      previous_ID = 4;
     }
 
     else if (current_ID == 5){
@@ -232,6 +236,7 @@ void loop() {
       client.flush();
       delay(20);
       client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      previous_ID = 5;
     }
 
     else if (current_ID == 6){
@@ -244,20 +249,32 @@ void loop() {
       client.flush();
       delay(20);
       client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      previous_ID = 6;
     }
 
     else if (current_ID == 7){
       if(previous_ID != 7){
-      client.print("STOP");
-      stopMotors();
-      delay(5000);
-      cameraloop();
-      current_ID = 0;
-      action_count = 0;
-      previous_ID = 7;
+        stop_time = millis();
+        client.flush();
+        client.print("STOP");
+        current_ID = 0;
+        action_count = 0;
+        previous_ID = 7;
       }
-      previous_ID = 0;
+      else {
+        if(millis() < stop_time + 5000){
+          client.flush();
+          client.print("STOP");
+          stopMotors();
+        }
+        else{
+          traverseT();
+          client.flush();
+          client.print("STRAIGHT");
+        }
+      }
     }
+  
 
     else if (current_ID == 8){
       client.flush();
@@ -267,12 +284,14 @@ void loop() {
       traverse_v();
       action_count = 0;
       client.flush();
+      delay(20);
       client.print("VCurrent Speed" + String(round((actual_RPM/60.0)*6.5*3.1415)) + " Target Speed: " + String(round((target_RPM/60.0)*6.5*3.1415)));
+      previous_ID = 8;
     }
 
     else if (current_ID == 9){
       client.flush();
-      client.print("Hairpin");
+      client.print("HairpinR");
 
       if(!spin_count){
         spin();
@@ -286,13 +305,14 @@ void loop() {
           action_count = 0;
           current_ID = 0;
           spin_count = false;
+          previous_ID = 9;
         }
       }
     }
 
     else if (current_ID == 10){
       client.flush();
-      client.print("Hairpin");
+      client.print("HairpinL");
       if(!spin_count){
         spin();
         spin_count = true;
@@ -304,13 +324,10 @@ void loop() {
           moveLeft();
           action_count = 0;
           current_ID = 0;
+          previous_ID = 10;
           spin_count = false;
         }
       }
-    }
-
-    if(action_count == 0){
-      previous_ID = current_ID;
     }
   }
 }

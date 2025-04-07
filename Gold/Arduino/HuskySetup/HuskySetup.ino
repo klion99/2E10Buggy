@@ -37,7 +37,7 @@ void loop() {
                 Serial.print("X: "); Serial.print(result.xCenter);
                 Serial.print(", Y: "); Serial.print(result.yCenter);
                 Serial.print(", Width: "); Serial.print(result.width);
-                Serial.print(", Height: "); Serial.println(result.height);
+                Serial.print(", size: "); Serial.println(result.width*result.height);
             }
         } else{
             
