@@ -13,6 +13,7 @@ HUSKYLENS huskylens;
 int ID;
 int current_time_c = 500;
 int update_c = 500;
+float size_irl = 0;
 
 int getID(){
   return ID;
@@ -43,10 +44,12 @@ void cameraloop() {
                 HUSKYLENSResult result = huskylens.get(i);
 /*              Serial.print("Object ID: "); Serial.println(result.ID);
                 Serial.print("X: "); Serial.print(result.xCenter);
-                Serial.print(", Y: "); Serial.print(result.yCenter);
-                Serial.print(", Width: "); Serial.print(result.width);
-                Serial.print(", Height: "); Serial.println(result.height); */
-              ID = result.ID;
+                Serial.print(", Y: "); Serial.print(result.yCenter);*/
+                size_irl = result.width * result.height;
+                Serial.println(size_irl);
+              if(size_irl < 800){
+                ID = result.ID;
+              }
             }
         } else{
             //Serial.println("NoObject");

@@ -135,14 +135,14 @@ void SetSpeed(char L_R_B, int Speed) {// L_R_B = Left or Right or Both
 //move right function that spins left motor faster than right
 void moveRight() {
   SetSpeed('R', 0);
-  SetSpeed('L', 105);
+  SetSpeed('L', 120);
   
 }
 
 
 //move left function that spins right motor faster than left
 void moveLeft() {
-  SetSpeed('R', 105);
+  SetSpeed('R', 120);
   SetSpeed('L', 0);
 }
 
@@ -175,6 +175,8 @@ void moveForwardv() {
 }
 
 void spin() {
+  stopMotors();
+  delay(1000);
   analogWrite(CR, 100);
   digitalWrite(RF, HIGH);
   digitalWrite(RB, LOW);
@@ -182,7 +184,7 @@ void spin() {
   analogWrite(CL, 100);
   digitalWrite(LF, LOW);
   digitalWrite(LB, HIGH);
-  delay(1100);
+  delay(1200);
 }
 
 

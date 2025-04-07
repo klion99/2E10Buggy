@@ -164,6 +164,12 @@ void loop() {
       client.flush();
       client.print("STRAIGHT");
     }
+    else if((current_ID == 0) && ( white())){
+        SetSpeed('R', 100);
+        SetSpeed('L', 100);
+        delay(100);
+        stopMotors();
+    }
 
     else if (current_ID == 1){
       traverseT();
@@ -241,12 +247,16 @@ void loop() {
     }
 
     else if (current_ID == 7){
+      if(previous_ID != 7){
       client.print("STOP");
       stopMotors();
       delay(5000);
       cameraloop();
       current_ID = 0;
       action_count = 0;
+      previous_ID = 7;
+      }
+      previous_ID = 0;
     }
 
     else if (current_ID == 8){
