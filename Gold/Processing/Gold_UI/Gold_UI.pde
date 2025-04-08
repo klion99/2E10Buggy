@@ -42,6 +42,7 @@ String message = "";
 String prevMessage = "";
 String incomingMessage = "";
 String ip = "192.168.4.1"; // Replace with your Arduino's IP
+//String ip = "192.168.0.13";
 Client myClient; // Client object to send data to the Arduino
 Knob ControlKnob;
 Textarea dialogueTextarea;
