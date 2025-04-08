@@ -158,17 +158,19 @@ void loop() {
     }
       
     //Serial.println(current_ID);
+    while((current_ID == 0 ) && ( white())){
+        SetSpeed('R', 100);
+        SetSpeed('L', 100);
+        delay(100);
+        stopMotors();
+        delay(500);
+        Serial.println("works");
+    }
 
     if(current_ID == 0){
       traverseT();
       client.flush();
       client.print("STRAIGHT");
-    }
-    else if((current_ID == 0) && ( white())){
-        SetSpeed('R', 100);
-        SetSpeed('L', 100);
-        delay(100);
-        stopMotors();
     }
 
     else if (current_ID == 1){
@@ -298,7 +300,7 @@ void loop() {
         spin_count = true;
       }
 
-      traverse();
+      traverseT();
       if (white()) {
         while((digitalRead(LEYE)!=HIGH)){
           moveRight();
@@ -318,7 +320,7 @@ void loop() {
         spin_count = true;
       }
 
-      traverse();
+      traverseT();
       if (white()) {
         while((digitalRead(REYE)== LOW)){
           moveLeft();

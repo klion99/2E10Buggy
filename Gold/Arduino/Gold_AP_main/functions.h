@@ -157,8 +157,8 @@ void stopMotors() {
 
 //for go mode 
 void moveForward() {
-  SetSpeed('R', 85);
-  SetSpeed('L', 85);
+  SetSpeed('R', 75);
+  SetSpeed('L', 75);
 
 }
 
@@ -184,7 +184,7 @@ void spin() {
   analogWrite(CL, 100);
   digitalWrite(LF, LOW);
   digitalWrite(LB, HIGH);
-  delay(1200);
+  delay(1100);
 }
 
 
