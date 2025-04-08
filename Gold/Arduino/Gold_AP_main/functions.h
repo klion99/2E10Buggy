@@ -391,11 +391,11 @@ void traverseT(){
     }
 
     //if condition for when both the buggy's IR sensors detect white
-  if (white()) {
+  /* if (white()) {
       //moveForwardD();
       stopMotors();
       PrintOnce("something is wrong");
-    }
+    } */
   }
   
 
