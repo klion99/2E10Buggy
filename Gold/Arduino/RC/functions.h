@@ -142,7 +142,7 @@ void moveRight() {
 
 //move left function that spins right motor faster than left
 void moveLeft() {
-  SetSpeed('R', 120);
+  SetSpeed('R', 130);
   SetSpeed('L', 0);
 }
 
@@ -157,8 +157,8 @@ void stopMotors() {
 
 //for go mode 
 void moveForward() {
-  SetSpeed('R', 75);
-  SetSpeed('L', 75);
+  SetSpeed('R', 100*1.2);
+  SetSpeed('L', 100);
 
 }
 
@@ -177,14 +177,14 @@ void moveForwardv() {
 void spin() {
   stopMotors();
   delay(1000);
-  analogWrite(CR, 100);
+  analogWrite(CR, 100*1.3);
   digitalWrite(RF, HIGH);
   digitalWrite(RB, LOW);
   
   analogWrite(CL, 100);
   digitalWrite(LF, LOW);
   digitalWrite(LB, HIGH);
-  delay(1100);
+  delay(1300);
 }
 
 

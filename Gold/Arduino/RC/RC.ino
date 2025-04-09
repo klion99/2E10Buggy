@@ -219,7 +219,7 @@ while(cmd == 't'){
   else if(cmd=='s' ) {
     stopMotors();
   } 
-  else if(cmd=='t') {
+  /* else if(cmd=='t') {
     PIDcalculateD();
 
     client.flush();
@@ -238,7 +238,7 @@ while(cmd == 't'){
     Serial.println(kd * derivative);
 
     traverse();
-  }
+  } */
   else if (cmd == 'u'){
     PIDcalculatev();
     client.flush();
@@ -256,9 +256,8 @@ while(cmd == 't'){
     //Serial.println(current_ID);
 
     while((current_ID == 0 ) && ( white())){
-        SetSpeed('R', 100);
-        SetSpeed('L', 100);
-        delay(100);
+        moveRight();
+        delay(200);
         stopMotors();
         delay(500);
         Serial.println("works");
@@ -398,7 +397,7 @@ while(cmd == 't'){
         spin_count = true;
       }
 
-      traverse();
+      traverseT();
       if (white()) {
         while((digitalRead(LEYE)!=HIGH)){
           moveRight();
@@ -418,7 +417,7 @@ while(cmd == 't'){
         spin_count = true;
       }
 
-      traverse();
+      traverseT();
       if (white()) {
         while((digitalRead(REYE)== LOW)){
           moveLeft();
