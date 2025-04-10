@@ -256,6 +256,8 @@ while(cmd == 't'){
     //Serial.println(current_ID);
 
     while((current_ID == 0 ) && ( white())){
+        stopMotors();
+        delay(500);
         moveRight();
         delay(200);
         stopMotors();

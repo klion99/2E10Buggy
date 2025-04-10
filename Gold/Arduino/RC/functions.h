@@ -135,14 +135,14 @@ void SetSpeed(char L_R_B, int Speed) {// L_R_B = Left or Right or Both
 //move right function that spins left motor faster than right
 void moveRight() {
   SetSpeed('R', 0);
-  SetSpeed('L', 120);
+  SetSpeed('L', 90);
   
 }
 
 
 //move left function that spins right motor faster than left
 void moveLeft() {
-  SetSpeed('R', 130);
+  SetSpeed('R', 120);
   SetSpeed('L', 0);
 }
 
@@ -157,8 +157,8 @@ void stopMotors() {
 
 //for go mode 
 void moveForward() {
-  SetSpeed('R', 100*1.2);
-  SetSpeed('L', 100);
+  SetSpeed('R', 100);
+  SetSpeed('L', 80);
 
 }
 
@@ -184,7 +184,7 @@ void spin() {
   analogWrite(CL, 100);
   digitalWrite(LF, LOW);
   digitalWrite(LB, HIGH);
-  delay(1300);
+  delay(1200);
 }
 
 
@@ -352,10 +352,10 @@ void traverse_v(){
     }
 
     //if condition for when both the buggy's IR sensors detect white
-  while (white()) {
+/*   while (white()) {
       stopMotors();
       PrintOnce("something is wrong");
-    }
+    } */
   }
 
 void traverseT(){
