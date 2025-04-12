@@ -1,10 +1,14 @@
+//the following code implements PID control for maintaining a speed sent from the processing GUI.
+//note that calculations are done in RPM. conversions are done in processing and arduino for communication purposes only.
+
 #pragma once
 #include <WiFiS3.h>
 #include "functions.h"
 #include <cstring>
 #include <Arduino.h>
 
-
+//velocity PID variables
+//default target RPM is 70.
 float target_RPM= 70; 
 int actual_RPM; 
 int actual_rpm_R;
@@ -31,17 +35,19 @@ double max_derivativev = 1000;
 int time_for_rpm_calc = 200; 
 int update = 200;
 
+//function to set PID constants for velocity control.
 void SetConstantsv(double KP = 1,double KI = 1,double KD = 1){
   kpv = KP;
   kiv = KI;
   kdv = KD;
 }
 
+//function update PWM value passed to PWM pins 
 void SetSpeedPIDv(float Speed) {
   
   median_speedv += Speed;
 
-  // Clamp the median_speed within 0-255 range
+  // Clamp the median speed within 0-255 range
   if (median_speedv < 0) {
     median_speedv = 0;
   } 
@@ -50,17 +56,19 @@ void SetSpeedPIDv(float Speed) {
   }
 }
 
-
+//intializing PID constants. 
 void PIDsetupv(){
   SetConstantsv(0.0059,0.000002,0.12); //P is tracking, I is long term error, d is reactivity.
 }
 
+//calculating the update needed for PID control of the speed
 void PIDcalculatev(){
   if(millis() > time_for_rpm_calc){
 
     current_time_dv = millis() / 1000.0; // Ensure floating-point precision
     unsigned long time_diff_dv = current_time_dv - last_time_dv;
 
+    //calculating the current RPM from encoders to implement negative feedback loop.
     if (time_diff_dv > 0) { // Prevent division by zero
       time_for_rpm_calc =  update + time_for_rpm_calc ;
       target_RPM = getSentSpeed();
@@ -70,6 +78,7 @@ void PIDcalculatev(){
       //resetting pulsecounters for each encoder
       pulseCountL = 0;
       pulseCountR = 0;
+      //RPM is taken as the average from the left and right encoder.
       actual_RPM = (actual_rpm_L + actual_rpm_R)/2;
 
       //derivative calculations
@@ -93,6 +102,7 @@ void PIDcalculatev(){
 
     integralv += errorv;
 
+    //capping integral to prevent extreme growth. 
     if(integralv > 40){
       integralv = 40;
     }
@@ -101,18 +111,11 @@ void PIDcalculatev(){
     }
 
     proportionalv = errorv;
-
+    //calcuating the update 
     velocity_PWMv =  proportionalv * kpv + integralv * kiv + derivativev * kdv;
-
+    //updating the PWM value passed to the PWM pins. 
     SetSpeedPIDv(velocity_PWMv);
-
-/*     Serial.print(velocity_PWMv);
-    Serial.print(", ");
-    Serial.print(actual_RPM); 
-    Serial.print(", ");
-    Serial.print(median_speedv); 
-    Serial.println(", "); */
-
+    //if turning is occuring, artifical input is passed to ensure smoother transition to target speed. 
     if(right() || left()){
       actual_RPM = target_RPM;
     }

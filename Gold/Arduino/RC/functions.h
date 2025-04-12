@@ -14,10 +14,11 @@ const int LF = 4;
 const int LB = 8;
 const int RF = 7;
 const int RB = 6;
+//PWM pins for speed control decleration
 const int CL = 10;
 const int CR = 11;
 
-//PID speed variables - voltage
+//PID speed variables - PWM value passed and updated in PIDv.h and PID.h respectively.
 float median_speedv = 100;
 int median_speed = 100;
 
@@ -154,7 +155,6 @@ void stopMotors() {
 
 
 //can set the speed at which motors move forward here
-
 //for go mode 
 void moveForward() {
   SetSpeed('R', 100);
@@ -174,6 +174,7 @@ void moveForwardv() {
   SetSpeed('L', median_speedv);
 }
 
+//spin buggy 180 degrees 
 void spin() {
   stopMotors();
   delay(1000);
@@ -278,7 +279,7 @@ void displayDistance(){
   matrix.endDraw();
 }
 
-//for distance following mode
+//for distance following mode via PID
 void traverse(){
   //checking distance
     checkdistance(); //runs US and displays distance on arduino
@@ -319,6 +320,7 @@ void traverse(){
     }
   }
 
+//line tracking for velocity controlled via PID mode.
 void traverse_v(){
   //checking distance
     checkdistance(); //runs US and displays distance on arduino
@@ -351,13 +353,14 @@ void traverse_v(){
         PrintOnce("Turning Left");
     }
 
-    //if condition for when both the buggy's IR sensors detect white
+    //if condition for when both the buggy's IR sensors detect white, commented out for gold to enable auto turns at junctions with no turn tags
 /*   while (white()) {
       stopMotors();
       PrintOnce("something is wrong");
     } */
   }
 
+//Huskylens line tracking function.
 void traverseT(){
   //checking distance
     checkdistance(); //runs US and displays distance on arduino
@@ -390,7 +393,7 @@ void traverseT(){
         PrintOnce("Turning Left");
     }
 
-    //if condition for when both the buggy's IR sensors detect white
+    //if condition for when both the buggy's IR sensors detect white, commented out for gold to enable auto turns at junctions with no turn tags
   /* if (white()) {
       //moveForwardD();
       stopMotors();

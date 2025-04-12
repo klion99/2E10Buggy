@@ -1,15 +1,17 @@
-//the following code shall only set up the wifi connection and run the relavent code for recieving commands from the client.
+//the following code sets up the wifi connection and run the relavent code for recieving commands from the client.
 
 #pragma once
 #include <WiFiS3.h>
-//#include "functions.h"
 #include <cstring>
 #include <Arduino.h>
 
-
+//decleration of command recived from processing.
 char command;
+//decleration of any input recived from processing.
 char recieve;
+//default speed 
 int sent_speed = 100;
+//character array to recieve velocities. 
 char s[3] = {'0','0','0'};
 
 bool clientConnected = false; //bool to detect if the client was connected previously
@@ -31,6 +33,7 @@ char getcommand(){
   return command; 
 }
 
+//returns a custom speed for PID control of the speed from processing
 int getSentSpeed(){
   return sent_speed; 
 }
@@ -38,7 +41,6 @@ int getSentSpeed(){
 
 void Wifisetup() {
   //copying in the corrected name and pass for the SSID and pass of the wifi network
-
   WiFi.beginAP(ssidAP,passAP);
   IPAddress ip = WiFi.localIP();
   Serial.print("IP Address:");
@@ -58,13 +60,13 @@ void Wifisetup() {
 
 void Wifiloop() {
   client = server.available();   // listen for incoming clients
-  if (client) {                             
-    //Serial.println("new client");                            
+  if (client) {                                                       
     while (client.connected()) { 
       //checking to see if the client is transmitting any data         
       if (client.available() > 0) {
         //reading the data
         recieve = client.read();
+        //if the flag V is noted in the recieved data, it is a sent speed, processing it to turn characters into integers. 
         if(recieve == 'V'){
           for (int i = 0; i < 3; i++){
             s[i] = client.read();
