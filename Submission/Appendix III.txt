@@ -1,0 +1,397 @@
+﻿commit 6bc1300e6b8f3f56d81572690996196b7b46ed32 (origin/experimental)
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 10 11:19:46 2025 +0100
+    Gold complete code
+    
+    Final Code version that was used for gold.
+    
+    Vive Maxine.
+commit c161c9e98022b6210af37b53eb6cb2b3c52baeb8
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 9 12:03:58 2025 +0100
+    Final tuning
+    
+    Right motor has dropped strenght significantly, adjustments made to counteract that.
+commit 21a5d1234c8392fd33a60cd5b0ea2032294dd918
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 21:42:07 2025 +0100
+:...skipping...
+commit 6bc1300e6b8f3f56d81572690996196b7b46ed32 (origin/experimental)
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 10 11:19:46 2025 +0100
+    Gold complete code
+    
+    Final Code version that was used for gold.
+    
+    Vive Maxine.
+commit c161c9e98022b6210af37b53eb6cb2b3c52baeb8
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 9 12:03:58 2025 +0100
+    Final tuning
+    
+    Right motor has dropped strenght significantly, adjustments made to counteract that.
+commit 21a5d1234c8392fd33a60cd5b0ea2032294dd918
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 21:42:07 2025 +0100
+    updated processing
+    
+:...skipping...
+commit 6bc1300e6b8f3f56d81572690996196b7b46ed32 (origin/experimental)
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 10 11:19:46 2025 +0100
+    Gold complete code
+    
+    Final Code version that was used for gold.
+    
+    Vive Maxine.
+commit c161c9e98022b6210af37b53eb6cb2b3c52baeb8
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 9 12:03:58 2025 +0100
+    Final tuning
+    
+    Right motor has dropped strenght significantly, adjustments made to counteract that.
+commit 21a5d1234c8392fd33a60cd5b0ea2032294dd918
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 21:42:07 2025 +0100
+    updated processing
+    
+    New processing added for RC control features
+commit 4cd21c688d852f759431c205a4f52b1853d28f38
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 21:07:44 2025 +0100
+    white line accidental detection
+    
+    logic updated
+commit 94eac3659d0831b9f0ab67fd2302b6977a7a9aa3
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 21:06:15 2025 +0100
+    RC implemented
+commit 9af09604861593a274193619793011f5b21ec752
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 8 16:13:01 2025 +0100
+    tuning
+    
+    small changes to delays and speeds
+commit d6791f8363185df27fe35d7c5d922c119e4cecc6
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Apr 7 22:55:24 2025 +0100
+    Implemented size checking correctly
+    
+    Also debugged stop sign, using previous_ID to check if a stop sign was just seen then ignore it and traverse. Also was issues with processing not always showing the stop sign which has been debugged as well.
+commit cbb67d47b6c29782d1b7c1cf63831df409d920ce
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Apr 7 17:57:08 2025 +0100
+    tuning spin and distance of tag size
+commit 3f7163dc87b63d8dbe867241cef3fe41c057aad0
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 3 15:11:33 2025 +0100
+    Gold is done (i think)
+commit 2b3873e5cb77abe379c824329025684b1228434d
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 3 14:35:42 2025 +0100
+    some updates to processing still some small issues.
+commit 763ef4ebdaa0a1306b6873e85634504924fa9294
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Apr 3 11:12:39 2025 +0100
+    need to debug processing
+    
+ up and implement the roundabout sign as it isn't showing up either.
+commit d90861b702ee5449fccd777a99dcddc54c1457fe
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Apr 3 10:02:09 2025 +0100
+    Add files via upload
+commit 663fba6041bda3eb3867e0a19e0a0deaa1b8cde8
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Apr 3 10:01:16 2025 +0100
+    Update Gold_UI.pde
+commit b79123b12269d76a889d16d96a7323e58e4ece10
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 2 18:57:44 2025 +0100
+    cleaned up code
+    
+an
+commit 07653a0b802827c4023cdf9623f84a926b61b0bb
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 2 15:08:50 2025 +0100
+    trying to spin and turn (hairpin turn)
+in/HEAD)
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Apr 2 14:38:11 2025 +0100
+    weee
+commit bc30d7ead8dc2ff572a588038a7f67c7244dc963
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 1 17:44:34 2025 +0100
+    Gold V1
+commit 7148336fc94cbe6da92668dffe72be05c81b8e75
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 1 12:33:39 2025 +0100
+    Small changes
+commit 1a7b02337e7260332b3df1902b3ba9d9476b3ef7
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Apr 1 12:05:10 2025 +0100
+    --
+commit 0d9018b7cc04942a231934b378528c60260038fa
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 31 21:53:57 2025 +0100
+    Rudimentary client comm implemented
+commit bd471ecdb586481ed55e26430cd88992f6384d37
+Merge: 94c27f4 50cbef9
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 31 21:38:27 2025 +0100
+    Merge branch 'main' of https://github.com/klion99/2E10Buggy
+commit 94c27f4385664726b5dcd5d5b49004af89967453
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 31 21:38:03 2025 +0100
+    All ID functionality implemented
+    
+ork as planned. Also need to implement client communication.
+commit 50cbef9eee63e4fac6f8ed7247fd80353fa7f3e0
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 31 20:28:37 2025 +0100
+    Sounds
+commit d9453768ac64217bf63d6c5eed7dd403d8a31d20
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 31 20:27:48 2025 +0100
+    Update Gold_UI.pde
+    
+    Updated to include sounds
+commit fec6a12b70171775172ef61c3da75cea86ce9d21
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 27 22:36:58 2025 +0000
+    Gold UI
+commit 95dfa0d4a2dff6a38ba93739e248603d0b4c7837
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Mar 27 15:00:05 2025 +0000
+    Camera integration
+commit 7a2684e443002fbae63178b186b8428d8d37df77
+Author: J3r1cho25 <Jsearle@tcd.ie>
+Date:   Wed Mar 26 15:47:52 2025 +0000
+    Create HuskySetup.ino
+commit d239166ed4fa987fbbee7f42bbdaac0c03ea3531
+Author: J3r1cho25 <Jsearle@tcd.ie>
+Date:   Wed Mar 26 14:18:28 2025 +0000
+    Update As GOLD
+commit 40eb6a3e856efc7c924982434095dd3cc30e293a
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 19 18:51:31 2025 +0000
+    Silver completed
+commit 161c4be7cf79e0ce91113e9b1e7ccb25d2bda74f
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 19 11:29:16 2025 +0000
+    updated max distance, fixed distance tracking mode when >70
+commit 5a57ea1a22212f61857c1e0c1bfb1ebefcb6166c
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 19 10:09:58 2025 +0000
+    max speed on distance tracking
+commit fa651cd26fc4ef2aaf00f46bbee39fcce8df5bbc
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Wed Mar 19 10:09:23 2025 +0000
+    Update Silver_Challenge_GUI.pde
+    
+    Updated Cap
+commit f9c7cf253093a37fa1d158755a9a0cee07944d33
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 19 08:51:21 2025 +0000
+    setting max distance tracking speed.
+commit 0a3b18f0350b093d2698fbd697399b35b3a3fe42
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 22:04:18 2025 +0000
+    update GUI
+commit 79e6132f2658d3ea20bb947bcb59b874320498cb
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 21:55:21 2025 +0000
+    --
+commit b8bbd2442ad71ffc6db661db4a096d5bdee1cc90
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 20:59:19 2025 +0000
+    reverting white statement after testing
+commit fa085c220be43fb3ff0feb93826e1b542d6e96e2
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 20:57:59 2025 +0000
+    all new code
+commit 9c2e85bb93cee63f5c11ead497f3fb571777f778
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 20:45:52 2025 +0000
+    --
+commit 91dc6d26acd7bc68cd59cf3814160b10da0a602b
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 15:36:00 2025 +0000
+    new-final-ver
+commit 6f433678bdd4f07dd047c92f63fd3cc006cba022
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 18 15:35:08 2025 +0000
+    Initial commit
+ 
+commit b902d616a986659280766fd6897db95a7f9694d8 (HEAD -> main, origin/main, origin/HEAD)
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Mar 13 14:18:57 2025 +0000
+    --
+commit 4ca0e41c3734794f0213c451cdf0c2e7e1f59aba
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Mar 13 14:14:44 2025 +0000
+    --
+commit 908f38e19b044bc66be12a8ad21613fbcc331a3f
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:14:18 2025 +0000
+    Update Silver_Challenge_GUI.pde
+commit fac3b5db04620f1b2bfe639a9658adedfb20aba9
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Thu Mar 13 14:13:23 2025 +0000
+    --
+commit d35ab6e96b50ca3f5fafc34274794b3a5a42af78
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:04:42 2025 +0000
+    Update Silver_Challenge_GUI.pde
+commit 630e4eb1e287a14c9bcea0766afc7cc4df30aed5
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:02:48 2025 +0000
+    Update WifiAP_main_PID.ino
+commit 35042eff895df42e8f2ff6ef61be7406380de0b0
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:02:21 2025 +0000
+    Update PID.h
+commit fa7b34b0fc3f688764f8d76f44f3545d4e33078d
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:01:51 2025 +0000
+    Delete WifiAP_main_PID_FLALOR.ino
+commit 16242ad23a067a447e0e0331c5af8bb54cd2b718
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:01:42 2025 +0000
+    Delete PID_FLALOR.h
+commit f718f111912622e33fffb1236278a952a06bc87d
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Thu Mar 13 14:01:31 2025 +0000
+    Delete Most_Recent_FLALOR.pde
+commit 0792b88305abd1d04efc9ced968737a435e5e7b8
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Wed Mar 12 22:28:06 2025 +0000
+    Rename Most_Recent.pde to Most_Recent_FLALOR.pde
+commit 31353c73832ab874461e13d2e7903d11d939ca27
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Wed Mar 12 22:27:44 2025 +0000
+    Rename PID.h to PID_FLALOR.h
+commit c2f8c96b63438c8a20d75f564e62ff334844fd52
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Wed Mar 12 22:26:27 2025 +0000
+    Rename WifiAP_main_PID.ino to WifiAP_main_PID_FLALOR.ino
+commit c7afe4cb285beace73e88a064df9c8fa8aee3b00
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Wed Mar 12 22:23:44 2025 +0000
+    Added Files to react to controlled speed with PID
+commit 88a95735eff6c68bf424b103375fc809f5966b2d
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 12 15:52:02 2025 +0000
+    Done for Monday
+commit f306a61498a65e7aa564168f3780ac47e7ce6b5a
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 12 15:39:15 2025 +0000
+    If statement moved for PID, now tuned on values alone.
+commit b6ebc52d47f70bc22507b9d38ebd23fff210007b
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Wed Mar 12 15:21:12 2025 +0000
+    determined if statement based tuning
+commit e8046c146d565b5dc4f5b1cdb86199df51d6ed76
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 11 18:21:08 2025 +0000
+    Checked speed setting works along with communication and all other features
+    
+    New default reset, all features work as intended, need to implement tuning of PID next.
+commit 910be5e4fd84789ac321c3c6b0d91b9319c6731f
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Tue Mar 11 18:06:34 2025 +0000
+    All communication works
+    
+    This includes the speed control - do not remove the if statement that sends the message repetedly, this is needed on the arduino side!!
+commit 074cc987c56ba5685c4ae57708fab173257210c3
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 10 17:47:08 2025 +0000
+    Taaaaah Daaaaah
+commit f4dd9a1acef675b3628248cce8baf905454dfe6c
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 10 17:31:55 2025 +0000
+    Weeeeeeee it should work
+    
+    Sorry Guru
+commit 4d59d0a719047a54190b416d919cfcfffbb9db88
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 17:12:53 2025 +0000
+    Need fintan to fix pls
+    
+    pls
+commit 12f1feb3e1083fef781effceb9e4357992ee8959
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 10 16:34:48 2025 +0000
+    Strings Again, Naturally
+    
+    Sorry Guru
+commit 63558024425f8510df4d29b848b0334ecbdc265f
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 16:27:24 2025 +0000
+    Problem with Speed function in Processing
+    
+    Get an error that says invalid number of arguments.
+commit abb3d4de49c3ca7d81348c4cadb5cd691c839aa6
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 16:19:30 2025 +0000
+    Update PID.h
+commit b61893735ffeb1938d3153f44b26586bb8d4433e (origin/PID_test)
+Merge: 8c1ee80 24cabad
+Author: J3r1cho25 <Jsearle@tcd.ie>
+Date:   Mon Mar 10 16:15:37 2025 +0000
+    Merge branch 'main' of https://github.com/klion99/2E10-Buggy-project
+commit 8c1ee80c349ba18294d583ee57a5ce5164b83afa
+Author: J3r1cho25 <Jsearle@tcd.ie>
+Date:   Mon Mar 10 16:15:29 2025 +0000
+    Stupidtest
+    
+    NO fckng reason what soever
+commit 24cabadb7282a11490811e88d3ce9dfd31901a9d
+Author: Fintan Lalor <62573759+FLalor@users.noreply.github.com>
+Date:   Mon Mar 10 16:12:50 2025 +0000
+    Update Silver_Challenge_GUI.pde
+    
+    Strings not ints
+commit d1721a07678aecfffd5c70499cff400c2f5960f6
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 15:30:03 2025 +0000
+    The master start case - Ground Zero
+    
+    Full functionality of Code
+commit 0963d814166fc125a72f8135e4f89f73a1e09ae7
+Merge: f2a6812 303449b
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:57:16 2025 +0000
+    Merge branch 'main' of https://github.com/klion99/2E10-Buggy-project
+commit f2a68125ec6607e191d3ceee1a8cf9ab3a4a2a58
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:57:02 2025 +0000
+    Organizing files
+commit 303449bf95d7f2f70214882e6a975f5ab28bca77
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:51:54 2025 +0000
+    Create README.md
+commit 585f910d82bc5ecf629f391f17a99de6c59909f6
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:43:58 2025 +0000
+    Silver challenge files upload
+commit e2509d00e1fdd608ec88fe594bcde731408f969c
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:41:50 2025 +0000
+    Initial commit
+(END)
+commit f2a68125ec6607e191d3ceee1a8cf9ab3a4a2a58
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:57:02 2025 +0000
+    Organizing files
+commit 303449bf95d7f2f70214882e6a975f5ab28bca77
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:51:54 2025 +0000
+    Create README.md
+commit 585f910d82bc5ecf629f391f17a99de6c59909f6
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:43:58 2025 +0000
+    Silver challenge files upload
+commit e2509d00e1fdd608ec88fe594bcde731408f969c
+Author: klion99 <53312520+klion99@users.noreply.github.com>
+Date:   Mon Mar 10 13:41:50 2025 +0000
+    Initial commit 
